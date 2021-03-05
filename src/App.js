@@ -1,5 +1,9 @@
 import React, { Component } from 'react';
 import firebase from "firebase/app"
+import User from './User';
+import UserForm from './UserForm';
+import {BrowserRouter, Route, Switch} from 'react-router-dom';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 class App extends Component {
   
@@ -11,10 +15,25 @@ class App extends Component {
   render() {        
     return (
       <div>
-        <h1>hello </h1>
+        <BrowserRouter>
+          <div>                            
+            <Switch>   
+              <Route path="/edit/:id" component={UserForm} />               
+              <Route path="/add" component={UserForm} />                       
+              <Route exact path="/" component={User} />             
+              <Route path="/*" component={NotFound} />                       
+            </Switch>   
+          </div>  
+        </BrowserRouter>  
       </div>
     );
   }
 }
 
 export default App;
+
+class NotFound extends Component {
+  render(){
+    return <div>Not Found</div>
+  }
+}
